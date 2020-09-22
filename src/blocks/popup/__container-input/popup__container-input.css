@@ -1,0 +1,32 @@
+@import url(./_error/popup__container-input_error.css);
+
+.popup__container-input {
+  width: 358px;
+  height: 27px;
+
+  display: flex;
+
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+
+  color: #000000;
+
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: transparent;
+}
+
+.popup__container-input:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 600px) {
+  .popup__container-input {
+    width: 220px;
+    height: 27px;
+    font-size: 12px;
+    line-height: 14px;
+  }
+}
