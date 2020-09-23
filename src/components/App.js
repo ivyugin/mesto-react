@@ -1,11 +1,11 @@
 import React from 'react';
-import './App.css';
+//import './App.css';
 import Header from './Header/Header.js';
 import Main from './Main/Main.js'
 import Footer from './Footer/Footer.js'
 import PopupWithForm from './PopupWithForm/PopupWithForm.js';
 import ImagePopup from './ImagePopup/ImagePopup.js';
-import api from './../utils/Api.js';
+import api from './../utils/api.js';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState();
@@ -89,6 +89,7 @@ function App() {
           onClose = { closeAllPopups } >
             <div className="popup__control">
               <input className="popup__container-input popup__container-input_type_title"
+                value={userName}
                 name="title" 
                 required
                 type="text" 
@@ -98,6 +99,7 @@ function App() {
             </div>
             <div className="popup__control">
               <input className="popup__container-input popup__container-input_type_subtitle"
+                value={userDescription}
                 name="subtitle" 
                 required 
                 type="text" 
