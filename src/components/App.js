@@ -1,11 +1,10 @@
 import React from 'react';
-//import './App.css';
 import Header from './Header/Header.js';
 import Main from './Main/Main.js'
 import Footer from './Footer/Footer.js'
 import PopupWithForm from './PopupWithForm/PopupWithForm.js';
 import ImagePopup from './ImagePopup/ImagePopup.js';
-import api from './../utils/api.js';
+import {api} from './../utils/api';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState();

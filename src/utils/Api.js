@@ -116,4 +116,4 @@ class Api {
 
 const api = new Api('https://mesto.nomoreparties.co/v1/cohort-14', '668dca3d-51ec-4823-a727-cc18d24544ec');
 
-export default api;
+export {api};
