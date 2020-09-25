@@ -4,7 +4,7 @@
   "private": true,
   "description": "project mesto moved to react",
   "author": "ivyugin",
-  "homepage": "https://ivyugin.github.io",
+  "homepage": "https://ivyugin.github.io/mesto-react",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
