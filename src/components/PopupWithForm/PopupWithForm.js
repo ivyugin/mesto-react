@@ -3,9 +3,10 @@ import React from 'react';
 class PopupWithForm extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { value: props.inputValue }
   }
+
   render() {
-    //console.log(this.props)
     return(
     <div className={`popup popup_${this.props.name} ${this.props.isOpen && 'popup_opened'}`}>
         <button className="popup__close-btn" onClick={this.props.onClose}></button>

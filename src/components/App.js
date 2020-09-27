@@ -88,7 +88,7 @@ function App() {
           onClose = { closeAllPopups } >
             <div className="popup__control">
               <input className="popup__container-input popup__container-input_type_title"
-                value={userName}
+                defaultValue={userName}
                 name="title" 
                 required
                 type="text" 
@@ -98,7 +98,7 @@ function App() {
             </div>
             <div className="popup__control">
               <input className="popup__container-input popup__container-input_type_subtitle"
-                value={userDescription}
+                defaultValue={userDescription}
                 name="subtitle" 
                 required 
                 type="text" 

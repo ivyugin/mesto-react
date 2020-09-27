@@ -6,6 +6,7 @@
   position: absolute;
   top: -40px;
   right: -40px;
+  transition: opacity 0.2s ease-out;
 
   background-image: url(./../../../images/close-btn.svg);
   cursor: pointer;
