@@ -3,7 +3,6 @@ import React from 'react';
 class PopupWithForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: props.inputValue }
   }
 
   render() {
