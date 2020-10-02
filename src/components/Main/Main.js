@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './../Card/Card.js';
+import {CurrentUserContext} from '../../contexts/CurrentUserContext.js';
 
 /*
 function handleEditAvatarClick() {
@@ -14,31 +15,37 @@ function handleAddPlaceClick() {
   document.querySelector('.popup_add').classList.add('popup_opened');
 }
 */
-function Main(props) {
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCardLike, onCardDelete}) {
+
+  const currentUser = React.useContext(CurrentUserContext);
+
+  
   return(
     <>
     <section className="profile">
       
       <div className="profile__info">
         <div className="profile__avatar">
-          <button className="profile__avatar-edit" onClick={props.onEditAvatar}></button>
-          <img className="profile__avatar-img" alt="Аватар" src={props.userAvatar} />
+          <button className="profile__avatar-edit" onClick={onEditAvatar}></button>
+          <img className="profile__avatar-img" alt="Аватар" src={currentUser.avatar} />
         </div>
         <div className="profile__description">
-          <h1 className="profile__name">{props.userName}</h1>
-          <button className="profile__edit-btn" onClick={props.onEditProfile}></button>
-          <p className="profile__job">{props.userDescription}</p>
+          <h1 className="profile__name">{currentUser.name}</h1>
+          <button className="profile__edit-btn" onClick={onEditProfile}></button>
+          <p className="profile__job">{currentUser.about}</p>
         </div>
       </div>
-      <button className="profile__add-btn" onClick={props.onAddPlace}></button>
+      <button className="profile__add-btn" onClick={onAddPlace}></button>
     </section>
     <ul className="places">
-      {props.cards.map((tempCard) => {
+      {cards.map((tempCard) => {
           return ( 
             <Card 
               key = {tempCard._id}
               card = {tempCard}
-              onCardClick = {props.onCardClick}
+              onCardClick = {onCardClick}
+              onCardLike = {onCardLike}
+              onCardDelete = {onCardDelete}
             /> 
           )
         })}

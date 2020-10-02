@@ -32,7 +32,7 @@ class Api {
             })
     }
 
-    editUserInfo(userInfo) {
+    setUserInfo(userInfo) {
         return fetch(this._baseUrl + '/users/me', {
             method: 'PATCH',
             headers: {
@@ -98,9 +98,9 @@ class Api {
     })
     }
 
-    likeCard(cardID, methodLike) {
+    likeCard(cardID, isLike) {
         return fetch(this._baseUrl + '/cards/likes/' + cardID, {
-            method: methodLike,
+            method: isLike ? 'PUT' : 'DELETE',
             headers: {
                 authorization: this._token
             }
