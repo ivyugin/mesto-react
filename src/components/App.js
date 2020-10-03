@@ -53,6 +53,9 @@ function App() {
         const newCards = cards.map((c) => c._id === card._id ? newCard : c);
         // Обновляем стейт
         setCards(newCards);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   } 
 
@@ -62,6 +65,9 @@ function App() {
         const newCards = cards.filter(c => c._id != card._id);
         setCards(newCards);
       })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleUpdateUser(userInfo) {
@@ -89,7 +95,7 @@ function App() {
   function handleAddPlaceSubmit(card) {
     api.addNewCard(card)
       .then((newCard) => {
-        setCards([...cards, newCard]);
+        setCards([newCard, ...cards]);
         closeAllPopups();
       })
       .catch((err) => {

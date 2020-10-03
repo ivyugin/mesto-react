@@ -1,18 +1,8 @@
 import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm.js';
-import {CurrentUserContext} from '../../contexts/CurrentUserContext.js';
 
 function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
-
-  const currentUser = React.useContext(CurrentUserContext);
-  const [name, setName] = React.useState();
-  const [description, setDescription] = React.useState();
   const inputRef = React.useRef();
-
-  React.useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser])
 
   function handleSubmit(e) {
     e.preventDefault();
