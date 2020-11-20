@@ -1,12 +1,18 @@
 import React from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
+import * as auth from './Auth.js';
 import Header from './Header/Header.js';
+import Login from './Login/Login';
+import Register from './Register/Register';
 import Main from './Main/Main.js'
 import Footer from './Footer/Footer.js'
+import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
 import PopupWithForm from './PopupWithForm/PopupWithForm.js';
 import EditProfilePopup from './EditProfilePopup/EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup/EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup/AddPlacePopup.js';
 import ImagePopup from './ImagePopup/ImagePopup.js';
+import InfoPopup from './InfoPopup/InfoPopup.js';
 import {api} from './../utils/Api.js';
 import {CurrentUserContext} from './../contexts/CurrentUserContext.js';
 
@@ -17,7 +23,44 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState(false);
   const [currentUser, setCurentUser] = React.useState({});
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [userInfo, setUserInfo] = React.useState();
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState();
+  const [isSucccessregistration, setIsSucccessregistration] = React.useState(false);
+  const history = useHistory();
 
+  function handleLogin(email) {
+    setLoggedIn(true);
+    setUserInfo(email);
+  }
+
+  function handleRegistration(status) {
+    setIsInfoPopupOpen(true);
+    setIsSucccessregistration(status)
+  }
+  
+  React.useEffect(() => {
+    function tokenCheck() {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      return
+    }
+
+    auth.checkToken(token)
+      .then((res) => {
+        if(res) {
+          const { email } = res.data;
+          setLoggedIn(true);
+          history.push('/');
+          setUserInfo(email);
+        }
+      })
+  }
+
+  tokenCheck();
+
+  }, []);
 
 //Get initial cards
   React.useEffect(() => {
@@ -62,7 +105,7 @@ function App() {
   function handleCardDelete(card) {
     api.deleteCard(card._id)
       .then((oldCard) => {
-        const newCards = cards.filter(c => c._id != card._id);
+        const newCards = cards.filter(c => c._id !== card._id);
         setCards(newCards);
       })
       .catch((err) => {
@@ -104,7 +147,7 @@ function App() {
 
   }
 
-//Open & close popup's function
+  //Open & close popup's function
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
@@ -126,22 +169,39 @@ function App() {
     setIsProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setSelectedCard(false);
+    setIsInfoPopupOpen(false);
   }
 
-  return (
+   return (
     <CurrentUserContext.Provider value={currentUser}>
     <div className="body">
       <div className="page">
-        <Header />
-        <Main 
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-          cards={cards}
-          onCardClick = {handleCardClick}
-          onCardLike = {handleCardLike}
-          onCardDelete = {handleCardDelete}
+        <Header
+          userInfo={userInfo}
         />
+        <Switch>
+          <Route path='/sign-up'>
+            <Register
+              handleRegistration = {handleRegistration}
+            />
+          </Route>
+          <Route path="/sign-in">
+            <Login
+              handleLogin={handleLogin} />
+          </Route>
+          <ProtectedRoute exact 
+            path="/"
+            loggedIn={loggedIn}
+            component={Main} 
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+            cards={cards}
+            onCardClick = {handleCardClick}
+            onCardLike = {handleCardLike}
+            onCardDelete = {handleCardDelete}
+          />
+        </Switch>
         <EditProfilePopup
           isOpen = { isEditProfilePopupOpen }
           onClose = { closeAllPopups } 
@@ -157,9 +217,13 @@ function App() {
           onClose = {closeAllPopups}
           onUpdateAvatar = {handleUpdateAvatar}
         />
-        
         <ImagePopup
           card = {selectedCard}
+          onClose = {closeAllPopups}
+        />
+        <InfoPopup
+          isOpen = {isInfoPopupOpen}
+          isSucccess = {isSucccessregistration}
           onClose = {closeAllPopups}
         />
         <Footer />

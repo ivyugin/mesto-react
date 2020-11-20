@@ -1,4 +1,8 @@
 @import url(./__logo/header__logo.css);
+@import url(./__infowrapper/header__infowrapper.css);
+@import url(./__userinfo/header__userinfo.css);
+@import url(./__link/header__link.css);
+@import url(./__log-out/header__log-out.css);
 
 .header {
   width: 100%;
@@ -8,6 +12,7 @@
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   border-bottom: 1px solid #545454;
 }

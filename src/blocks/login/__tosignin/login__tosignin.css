@@ -1,0 +1,11 @@
+.login__tosignin {
+  margin-top: 15px;
+  color: #FFFFFF;
+  background: transparent;
+  border: none;
+}
+
+.login__tosignin:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}

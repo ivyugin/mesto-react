@@ -1,0 +1,13 @@
+.header__log-out {
+  color: #A9A9A9;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 930px) {
+  .header__log-out {
+    margin-right: 27px;
+  }
+}
